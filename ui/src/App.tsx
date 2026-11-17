@@ -71,7 +71,7 @@ export default function DebateRoom() {
   return (
     <>
       <PageHeader title="Debate Room" subtitle="Three agents argue your technical question. A Judge decides." />
-      <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-6 pb-8">
+      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-6 pb-8">
         <QuestionForm busy={starting} onDebate={onDebate} />
         {error && <ErrorNotice message={error} onDismiss={() => setError('')} />}
         {debate && (
