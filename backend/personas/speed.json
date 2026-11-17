@@ -1,0 +1,8 @@
+{
+  "id": "speed",
+  "label": "Delivery speed",
+  "focus": "How fast the team can ship and change",
+  "order": 3,
+  "color": "#3b7dd8",
+  "agent": "speed"
+}

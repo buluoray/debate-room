@@ -1,0 +1,8 @@
+{
+  "id": "cost",
+  "label": "Cost",
+  "focus": "Total cost of ownership as you grow",
+  "order": 2,
+  "color": "#2e8b57",
+  "agent": "cost"
+}

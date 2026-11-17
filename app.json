@@ -1,0 +1,38 @@
+{
+  "name": "debate-room",
+  "version": "0.1.0",
+  "displayName": "Debate Room",
+  "description": "Ask a technical question and watch three agents argue it out from the Security, Cost and Delivery speed points of view. A Judge agent then writes a decision record.",
+  "author": "buluoray",
+  "iconPath": "assets/icon.png",
+  "tags": ["decisions", "architecture", "agents"],
+  "agents": [
+    "agents/security.json",
+    "agents/cost.json",
+    "agents/speed.json",
+    "agents/judge.json"
+  ],
+  "backend": {
+    "hooks": {
+      "routes": "backend.api:register_routes"
+    }
+  },
+  "ui": {
+    "entry": "dist/index.mjs",
+    "pages": [
+      {
+        "route": "/apps/debate-room",
+        "label": "Debate Room",
+        "icon": "Package"
+      }
+    ]
+  },
+  "permissions": {
+    "api": [
+      "/api/chat",
+      "/api/apps/debate-room"
+    ],
+    "storage": true,
+    "agentTurns": true
+  }
+}
