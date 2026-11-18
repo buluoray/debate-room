@@ -9,6 +9,7 @@ import QuestionForm from './components/QuestionForm'
 import StatsBar from './components/StatsBar'
 import * as client from './lib/api'
 import type { Debate, Decision, Persona } from './lib/types'
+import { nextDecision } from './lib/decision'
 
 export default function DebateRoom() {
   const api = useAppApi()
@@ -34,6 +35,7 @@ export default function DebateRoom() {
 
   async function onDebate(question: string) {
     setError('')
+    setDecision(nextDecision({ kind: 'debate-started' }))
     setStarting(true)
     try {
       const { debate: started, plan } = await client.startDebate(api, question)
