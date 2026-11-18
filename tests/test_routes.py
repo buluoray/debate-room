@@ -15,7 +15,7 @@ class DebateRoutesTest(unittest.TestCase):
         status, data = self.start()
         self.assertEqual(status, 200)
         plan = data["plan"]
-        self.assertEqual(set(plan), {"security", "cost", "speed"})
+        self.assertEqual(set(plan), {"security", "cost", "speed", "compliance"})
         debate_id = data["debate"]["id"]
         self.assertEqual(plan["cost"]["slot"], f"debate-room-{debate_id}-cost")
         self.assertEqual(plan["cost"]["agent"], "cost")
@@ -55,7 +55,8 @@ class DebateRoutesTest(unittest.TestCase):
     def test_personas_route(self):
         status, data = call(personas.list_personas, FakeRequest(), self.ctx)
         self.assertEqual(status, 200)
-        self.assertEqual(len(data["personas"]), 3)
+        ids = [p["id"] for p in data["personas"]]
+        self.assertEqual(ids, ["security", "cost", "speed", "compliance"])
 
 
 if __name__ == "__main__":
