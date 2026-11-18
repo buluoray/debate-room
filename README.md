@@ -29,7 +29,9 @@ the Kiro Crew gateway. In the dashboard: App Store, find Debate Room, Enable, an
 accept the trust prompt. The app then shows in the sidebar.
 
 After you change the code, rebuild the page and run
-`kirocrew app update debate-room --source "$PWD"`.
+`kirocrew app update debate-room --source "$PWD"`. The update copies the new
+files; the backend Python is loaded when the app is enabled, so after a backend
+change also run `kirocrew app disable debate-room && kirocrew app enable debate-room`.
 
 ## Dev mode
 
@@ -78,6 +80,13 @@ scripts/test.sh           runs all checks
 - **A persona**: add `backend/personas/<id>.json` and `agents/<id>.json`, and list
   the agent file in `app.json` under `agents`.
 - **A UI piece**: add `ui/src/components/<Name>.tsx` and mount it where it belongs.
+
+## Contributing
+
+- One change per branch and pull request. Keep it small and add a test.
+- Run `./scripts/test.sh` before you push. Backend tests use only the standard
+  library; UI tests need Node.js and npm.
+- Do not commit `ui/dist/` or `ui/node_modules/`; they are built locally.
 
 ## How it works
 
