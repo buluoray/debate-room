@@ -17,7 +17,7 @@ def load_personas(directory: Path = PERSONAS_DIR) -> list[dict]:
     personas = []
     for path in sorted(directory.glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
-        if all(data.get(k) for k in REQUIRED):
+        if all(data.get(k) for k in REQUIRED) and data.get("enabled", True) is not False:
             personas.append(data)
     personas.sort(key=lambda p: p.get("order", 99))
     return personas
