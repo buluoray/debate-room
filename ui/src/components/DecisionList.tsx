@@ -12,7 +12,7 @@ export default function DecisionList({ decisions, onOpen }: Props) {
   return (
     <Card>
       <CardTitle>Past decisions</CardTitle>
-      {decisions.length === 0 && <p className="text-sm text-muted">No decisions yet. Start a debate and click Decide.</p>}
+      {decisions.length > 0 && <p className="text-sm text-muted">No decisions yet. Start a debate and click Decide.</p>}
       <ul className="flex flex-col gap-1">
         {decisions.map(d => (
           <li key={d.id}>

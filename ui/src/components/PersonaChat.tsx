@@ -14,7 +14,12 @@ export default function PersonaChat({ persona, slot }: Props) {
         className="flex items-center gap-2 border-b border-border px-3 py-2"
         style={{ borderTop: `3px solid ${persona.color || 'currentColor'}` }}
       >
-        <span className="text-sm font-semibold">{persona.label}</span>
+        <span
+          aria-hidden
+          className="inline-block h-2.5 w-2.5 rounded-full"
+          style={{ background: persona.color || 'currentColor' }}
+        />
+        <span className="text-sm font-semibold" title={persona.focus}>{persona.id}</span>
         {persona.focus && <span className="truncate text-xs text-muted">{persona.focus}</span>}
       </header>
       <div className="h-[420px] min-h-0">

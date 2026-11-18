@@ -51,6 +51,14 @@ export async function decide(api: AppApi, debateId: string, transcripts: Record<
   return res.decision
 }
 
+export async function getStats(api: AppApi): Promise<{ debates: number; decisions: number }> {
+  return api.get(`${BASE}/stats`)
+}
+
+export async function exportMarkdown(api: AppApi, decisionId: string) {
+  return api.get<{ filename: string; markdown: string }>(`${BASE}/decisions/${decisionId}/markdown`)
+}
+
 export async function listDecisions(api: AppApi): Promise<Decision[]> {
   const res = await api.get<{ decisions: Decision[] }>(`${BASE}/decisions`)
   return res.decisions

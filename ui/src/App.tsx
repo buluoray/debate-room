@@ -6,6 +6,7 @@ import DecideButton from './components/DecideButton'
 import DecisionCard from './components/DecisionCard'
 import DecisionList from './components/DecisionList'
 import QuestionForm from './components/QuestionForm'
+import StatsBar from './components/StatsBar'
 import * as client from './lib/api'
 import type { Debate, Decision, Persona } from './lib/types'
 
@@ -19,9 +20,11 @@ export default function DebateRoom() {
   const [decision, setDecision] = useState<Decision | null>(null)
   const [decisions, setDecisions] = useState<Decision[]>([])
   const [error, setError] = useState('')
+  const [stats, setStats] = useState<{ debates: number; decisions: number } | null>(null)
 
   const refreshDecisions = useCallback(() => {
     client.listDecisions(api).then(setDecisions).catch(e => setError(String(e)))
+    client.getStats(api).then(setStats).catch(() => setStats(null))
   }, [api])
 
   useEffect(() => {
@@ -32,7 +35,6 @@ export default function DebateRoom() {
   async function onDebate(question: string) {
     setError('')
     setStarting(true)
-    setDecision(null)
     try {
       const { debate: started, plan } = await client.startDebate(api, question)
       // All persona chats start at once.
@@ -41,6 +43,7 @@ export default function DebateRoom() {
       )
       setDebate(started)
       setSlots(Object.fromEntries(entries))
+      refreshDecisions()
     } catch (e) {
       setError(String(e))
     } finally {
@@ -82,6 +85,7 @@ export default function DebateRoom() {
           </>
         )}
         {decision && <DecisionCard decision={decision} />}
+        <StatsBar stats={stats} />
         <DecisionList decisions={decisions} onOpen={setDecision} />
       </div>
     </>

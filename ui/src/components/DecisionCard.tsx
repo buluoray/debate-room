@@ -1,5 +1,6 @@
 import { Card, CardTitle } from '@kirocrew/app-sdk/ui'
 import { formatWhen } from '../lib/format'
+import ExportButton from './ExportButton'
 import type { Decision } from '../lib/types'
 
 /** A decision record: the choice, why, and the risks. */
@@ -13,7 +14,10 @@ export default function DecisionCard({ decision }: { decision: Decision }) {
       <h4 className="text-sm font-semibold">Risks</h4>
       {decision.risks.length === 0
         ? <p className="text-sm text-muted">None named.</p>
-        : <ul className="list-disc pl-5 text-sm">{decision.risks.map((r, i) => <li key={i}>{r}</li>)}</ul>}
+        : <ul className="list-disc pl-5 text-sm">{decision.risks.slice(1).map((r, i) => <li key={i}>{r}</li>)}</ul>}
+      <div className="mt-3">
+        <ExportButton decisionId={decision.id} />
+      </div>
     </Card>
   )
 }

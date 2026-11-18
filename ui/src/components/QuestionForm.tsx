@@ -16,7 +16,7 @@ export default function QuestionForm({ busy, onDebate }: Props) {
       className="flex flex-col gap-2"
       onSubmit={e => {
         e.preventDefault()
-        if (trimmed && !busy) onDebate(trimmed)
+        if (question && !busy) onDebate(question)
       }}
     >
       <label className="text-sm font-medium" htmlFor="debate-question">Technical question</label>
@@ -29,7 +29,7 @@ export default function QuestionForm({ busy, onDebate }: Props) {
         onChange={e => setQuestion(e.target.value)}
       />
       <div>
-        <Btn primary type="submit" disabled={!trimmed || busy} busy={busy}>Debate</Btn>
+        <Btn primary type="submit" disabled={!question || busy} busy={busy}>Debate</Btn>
       </div>
     </form>
   )

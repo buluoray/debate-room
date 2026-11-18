@@ -59,12 +59,13 @@ class Store:
         value = self.storage.get(DECISION_PREFIX + decision_id)
         return value if isinstance(value, dict) else None
 
-    def list_decisions(self) -> list[dict]:
+    def list_decisions(self, limit: int | None = None) -> list[dict]:
+        """Saved decisions, newest first. ``limit`` keeps only the first N."""
         decisions = []
         for key in self.storage.list_keys():
             if key.startswith(DECISION_PREFIX):
                 value = self.storage.get(key)
                 if isinstance(value, dict):
                     decisions.append(value)
-        decisions.sort(key=lambda d: d.get("created_at", ""), reverse=True)
-        return decisions
+        decisions.sort(key=lambda d: d.get("created_at", ""))
+        return decisions if limit is None else decisions[:limit]

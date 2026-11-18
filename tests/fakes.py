@@ -43,9 +43,10 @@ class FakeCtx:
 
 
 class FakeRequest:
-    def __init__(self, body=None, match_info=None):
+    def __init__(self, body=None, match_info=None, query=None):
         self._body = body
         self.match_info = match_info or {}
+        self.query = query or {}
 
     async def json(self):
         if self._body is None:
