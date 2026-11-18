@@ -1,0 +1,8 @@
+{
+  "id": "compliance",
+  "label": "Compliance",
+  "focus": "Regulation, audit trails, data residency, privacy law",
+  "order": 4,
+  "color": "#8e6bbf",
+  "agent": "compliance"
+}

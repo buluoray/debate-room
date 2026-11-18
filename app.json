@@ -10,6 +10,7 @@
     "agents/security.json",
     "agents/cost.json",
     "agents/speed.json",
+    "agents/compliance.json",
     "agents/judge.json"
   ],
   "backend": {
