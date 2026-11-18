@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Btn } from '@kirocrew/app-sdk/ui'
 import { debateQuestion } from '../lib/debateQuestion'
+import CharCounter from './CharCounter'
+import { isTooLong } from '../lib/charCount'
 
 interface Props {
   busy: boolean
@@ -29,8 +31,9 @@ export default function QuestionForm({ busy, onDebate }: Props) {
         value={question}
         onChange={e => setQuestion(e.target.value)}
       />
+      <CharCounter text={question} />
       <div>
-        <Btn primary type="submit" disabled={!trimmed || busy} busy={busy}>Debate</Btn>
+        <Btn primary type="submit" disabled={!trimmed || busy || isTooLong(question)} busy={busy}>Debate</Btn>
       </div>
     </form>
   )
