@@ -12,6 +12,15 @@ class ExportTest(unittest.TestCase):
         self.assertIn("## Why\n\nSimple.", md)
         self.assertIn("## Risks\n\nNone named.", md)
 
+    def test_risks_are_numbered_from_one(self):
+        md = to_markdown({"choice": "X", "risks": ["Lock-in", "Ops load"]})
+        self.assertIn("## Risks\n\n1. Lock-in\n2. Ops load\n", md)
+        self.assertNotIn("0. ", md)
+
+    def test_single_risk_is_numbered_one(self):
+        md = to_markdown({"choice": "X", "risks": ["Only one"]})
+        self.assertIn("## Risks\n\n1. Only one\n", md)
+
 
 if __name__ == "__main__":
     unittest.main()
