@@ -1,5 +1,6 @@
 import { Card, CardTitle } from '@kirocrew/app-sdk/ui'
 import { formatWhen, truncate } from '../lib/format'
+import { relativeTime } from '../lib/relativeTime'
 import type { Decision } from '../lib/types'
 
 interface Props {
@@ -16,9 +17,9 @@ export default function DecisionList({ decisions, onOpen }: Props) {
       <ul className="flex flex-col gap-1">
         {decisions.map(d => (
           <li key={d.id}>
-            <button type="button" className="w-full text-left text-sm hover:underline" onClick={() => onOpen(d)}>
+            <button type="button" className="w-full text-left text-sm hover:underline" title={formatWhen(d.created_at)} onClick={() => onOpen(d)}>
               <span className="font-medium">{d.choice}</span>
-              <span className="text-muted"> · {truncate(d.question, 80)} · {formatWhen(d.created_at)}</span>
+              <span className="text-muted"> · {truncate(d.question, 80)} · {relativeTime(d.created_at)}</span>
             </button>
           </li>
         ))}
