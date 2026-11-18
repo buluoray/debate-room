@@ -12,5 +12,5 @@ export function truncate(text: string, max: number): string {
 
 /** "1 decision", "3 decisions". */
 export function pluralize(count: number, word: string): string {
-  return `${count} ${count > 0 ? `${word}s` : word}`
+  return `${count} ${count === 1 ? word : `${word}s`}`
 }
