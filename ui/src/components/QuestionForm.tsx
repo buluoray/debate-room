@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Btn } from '@kirocrew/app-sdk/ui'
+import { debateQuestion } from '../lib/debateQuestion'
 
 interface Props {
   busy: boolean
@@ -9,14 +10,14 @@ interface Props {
 /** The question box and the Debate button. */
 export default function QuestionForm({ busy, onDebate }: Props) {
   const [question, setQuestion] = useState('')
-  const trimmed = question.trim()
+  const trimmed = debateQuestion(question)
 
   return (
     <form
       className="flex flex-col gap-2"
       onSubmit={e => {
         e.preventDefault()
-        if (question && !busy) onDebate(question)
+        if (trimmed && !busy) onDebate(trimmed)
       }}
     >
       <label className="text-sm font-medium" htmlFor="debate-question">Technical question</label>
@@ -29,7 +30,7 @@ export default function QuestionForm({ busy, onDebate }: Props) {
         onChange={e => setQuestion(e.target.value)}
       />
       <div>
-        <Btn primary type="submit" disabled={!question || busy} busy={busy}>Debate</Btn>
+        <Btn primary type="submit" disabled={!trimmed || busy} busy={busy}>Debate</Btn>
       </div>
     </form>
   )
