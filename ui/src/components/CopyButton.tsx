@@ -1,17 +1,19 @@
 import { Btn } from '@kirocrew/app-sdk/ui'
 import { useState } from 'react'
+import { copyText, type CopyResult } from '../lib/clipboard'
 import { decisionText } from '../lib/decisionText'
 import type { Decision } from '../lib/types'
 
+const LABEL: Record<CopyResult | 'idle', string> = { idle: 'Copy', copied: 'Copied', failed: 'Copy failed' }
+
 /** Puts one decision on the clipboard as plain text. */
 export default function CopyButton({ decision }: { decision: Decision }) {
-  const [copied, setCopied] = useState(false)
+  const [state, setState] = useState<CopyResult | 'idle'>('idle')
 
   async function onCopy() {
-    await navigator.clipboard.writeText(decisionText(decision))
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
+    setState(await copyText(decisionText(decision)))
+    setTimeout(() => setState('idle'), 1500)
   }
 
-  return <Btn onClick={onCopy}>{copied ? 'Copied' : 'Copy'}</Btn>
+  return <Btn onClick={onCopy}>{LABEL[state]}</Btn>
 }
