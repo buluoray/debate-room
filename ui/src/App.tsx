@@ -7,6 +7,8 @@ import DecisionCard from './components/DecisionCard'
 import DecisionList from './components/DecisionList'
 import QuestionForm from './components/QuestionForm'
 import StatsBar from './components/StatsBar'
+import DebateStyles from './components/DebateStyles'
+import StageHero from './components/StageHero'
 import * as client from './lib/api'
 import type { Debate, Decision, Persona } from './lib/types'
 import { nextDecision } from './lib/decision'
@@ -77,18 +79,20 @@ export default function DebateRoom() {
 
   return (
     <>
+      <DebateStyles />
       <PageHeader title="Debate Room" subtitle="Three agents argue your technical question. A Judge decides." />
-      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-6 pb-8">
+      <div className="dr-stage min-h-0 flex-1 space-y-4 overflow-y-auto px-6 pb-8">
+        <StageHero />
         <QuestionForm busy={starting} onDebate={onDebate} />
         {error && <ErrorNotice message={error} onDismiss={() => setError('')} />}
         {debate && (
           <>
-            <p className="text-sm"><span className="font-semibold">Question:</span> {debate.question}</p>
+            <p className="dr-motion text-sm"><span className="dr-motion-label font-semibold">Question:</span> <span className="dr-motion-text">{debate.question}</span></p>
             <DebateBoard personas={personas} slots={slots} />
             <DecideButton busy={deciding} onDecide={onDecide} />
           </>
         )}
-        {decision && <DecisionCard decision={decision} />}
+        {decision && <div className="dr-verdict"><DecisionCard decision={decision} /></div>}
         <StatsBar stats={stats} />
         <DecisionList decisions={decisions} onOpen={setDecision} />
       </div>
