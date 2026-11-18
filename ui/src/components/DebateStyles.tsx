@@ -4,18 +4,15 @@ const CSS = `
 .dr-stage { --dr-ink: var(--color-text, currentColor); }
 .dr-hero {
   position: relative; overflow: hidden; margin: 0 0 4px; padding: 20px 22px;
-  border: 1px solid var(--color-border, rgba(127,127,127,.3)); border-radius: 14px;
-  background:
-    linear-gradient(115deg, rgba(217,83,79,.14), transparent 38%),
-    linear-gradient(245deg, rgba(59,125,216,.14), transparent 38%),
-    linear-gradient(0deg, rgba(46,139,87,.12), transparent 60%);
+  border: 1px solid var(--color-border, color-mix(in srgb, currentColor 30%, transparent)); border-radius: 14px;
+  background: linear-gradient(135deg, color-mix(in srgb, currentColor 10%, transparent), transparent 60%);
 }
 .dr-hero-kicker { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; opacity: .7; }
 .dr-hero-title { font-size: 34px; font-weight: 900; letter-spacing: -.02em; line-height: 1.05; margin-top: 4px; }
 .dr-hero-sub { font-size: 14px; opacity: .8; margin-top: 6px; }
 .dr-motion {
   border-left: 6px solid currentColor; padding: 10px 16px; border-radius: 4px;
-  background: rgba(127,127,127,.08);
+  background: color-mix(in srgb, currentColor 8%, transparent);
 }
 .dr-motion-label { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; opacity: .65; }
 .dr-motion-text { font-size: 24px; font-weight: 800; line-height: 1.25; margin-top: 2px; }
@@ -33,7 +30,7 @@ const CSS = `
 .dr-col[data-variant="sprint"] .dr-col-head { background: linear-gradient(100deg, color-mix(in srgb, var(--dr-accent) 28%, transparent), transparent 85%); }
 .dr-col[data-variant="sprint"] { border-radius: 4px 22px 4px 22px !important; }
 .dr-col[data-variant="record"] { border-style: dashed !important; }
-.dr-col[data-variant="plain"] .dr-col-head { background: rgba(127,127,127,.08); }
+.dr-col[data-variant="plain"] .dr-col-head { background: color-mix(in srgb, currentColor 8%, transparent); }
 .dr-col:focus-within::after { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--dr-accent); animation: dr-pulse 1.6s ease-in-out infinite; }
 .dr-verdict { position: relative; border: 3px solid currentColor; border-radius: 16px; padding: 4px; animation: dr-land .5s cubic-bezier(.2,.9,.3,1.2) both; }
 .dr-verdict::before { content: "Verdict"; position: absolute; top: -12px; left: 18px; padding: 0 8px; font-size: 11px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; background: var(--color-bg, Canvas); }

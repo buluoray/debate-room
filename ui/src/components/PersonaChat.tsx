@@ -1,4 +1,5 @@
 import { ChatEmbed } from '@kirocrew/app-sdk'
+import type { CSSProperties } from 'react'
 import type { Persona } from '../lib/types'
 import { personaName } from '../lib/personaName'
 import { personaTheme } from '../theme'
@@ -15,7 +16,7 @@ export default function PersonaChat({ persona, slot }: Props) {
   return (
     <section
       data-variant={theme.variant}
-      style={{ '--dr-accent': theme.accent } as React.CSSProperties}
+      style={{ '--dr-accent': theme.accent } as CSSProperties}
       className="dr-col flex min-h-0 min-w-0 flex-col rounded-lg border border-border">
       <header
         className="dr-col-head flex items-center gap-2 border-b border-border px-3 py-2"
