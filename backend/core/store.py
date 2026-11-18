@@ -67,5 +67,5 @@ class Store:
                 value = self.storage.get(key)
                 if isinstance(value, dict):
                     decisions.append(value)
-        decisions.sort(key=lambda d: d.get("created_at", ""))
+        decisions.sort(key=lambda d: d.get("created_at", ""), reverse=True)
         return decisions if limit is None else decisions[:limit]
