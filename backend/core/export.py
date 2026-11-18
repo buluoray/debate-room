@@ -20,6 +20,6 @@ def to_markdown(decision: dict) -> str:
     risks = decision.get("risks") or []
     if not risks:
         lines.append("None named.")
-    for number, risk in enumerate(risks):
+    for number, risk in enumerate(risks, start=1):
         lines.append(f"{number}. {risk}")
     return "\n".join(lines) + "\n"
