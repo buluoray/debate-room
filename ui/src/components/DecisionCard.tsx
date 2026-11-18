@@ -1,6 +1,7 @@
 import { Card, CardTitle } from '@kirocrew/app-sdk/ui'
 import { formatWhen } from '../lib/format'
 import { risksToShow } from '../lib/risks'
+import CopyButton from './CopyButton'
 import ExportButton from './ExportButton'
 import type { Decision } from '../lib/types'
 
@@ -17,7 +18,7 @@ export default function DecisionCard({ decision }: { decision: Decision }) {
         ? <p className="text-sm text-muted">None named.</p>
         : <ul className="list-disc pl-5 text-sm">{risksToShow(decision.risks).map((r, i) => <li key={i}>{r}</li>)}</ul>}
       <div className="mt-3">
-        <ExportButton decisionId={decision.id} />
+        <ExportButton decisionId={decision.id} /> <CopyButton decision={decision} />
       </div>
     </Card>
   )
