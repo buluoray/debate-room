@@ -14,6 +14,7 @@ from ..core.route import Route
 from ..core.store import Store, new_id
 
 MAX_QUESTION = 2000
+MIN_QUESTION = 10
 
 
 def plan_debate(question: str, personas: list[dict], debate_id: str) -> dict:
@@ -34,6 +35,8 @@ async def start_debate(request, ctx):
     question = str(body.get("question") or "").strip()
     if not question:
         return error("Write a question first.")
+    if len(question) < MIN_QUESTION:
+        return error(f"Ask a full question (at least {MIN_QUESTION} characters).")
     if len(question) > MAX_QUESTION:
         return error(f"Keep the question under {MAX_QUESTION} characters.")
     debate_id = new_id()

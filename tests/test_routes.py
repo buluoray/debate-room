@@ -25,6 +25,15 @@ class DebateRoutesTest(unittest.TestCase):
         status, _ = self.start("   ")
         self.assertEqual(status, 400)
 
+    def test_short_question_is_refused(self):
+        status, data = self.start("  db?      ")
+        self.assertEqual(status, 400)
+        self.assertEqual(data["error"], "Ask a full question (at least 10 characters).")
+
+    def test_ten_character_question_is_accepted(self):
+        status, _ = self.start("  0123456789  ")
+        self.assertEqual(status, 200)
+
     def test_get_debate(self):
         _, data = self.start()
         debate_id = data["debate"]["id"]
