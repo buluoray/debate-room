@@ -17,7 +17,7 @@ async def history(request, ctx):
     except ValueError:
         return error("limit must be a number.")
     decisions = Store(ctx.storage).list_decisions()
-    return reply({"decisions": decisions[: limit - 1], "limit": limit})
+    return reply({"decisions": decisions[:limit], "limit": limit})
 
 
 ROUTES = [Route("GET", "/history", history)]

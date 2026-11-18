@@ -14,6 +14,14 @@ class HistoryStatsTest(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(data["limit"], 100)
 
+    def test_history_returns_exactly_limit_decisions(self):
+        ctx = FakeCtx()
+        for i in range(3):
+            ctx.storage.set(f"decision-{i}", {"id": str(i), "created_at": f"2026-01-0{i + 1}"})
+        for limit, want in (("1", 1), ("2", 2), ("3", 3), ("5", 3)):
+            _, data = call(history.history, FakeRequest(query={"limit": limit}), ctx)
+            self.assertEqual(len(data["decisions"]), want, f"limit={limit}")
+
     def test_stats_counts_debates(self):
         ctx = FakeCtx()
         ctx.storage.set("debate-a", {"id": "a"})
