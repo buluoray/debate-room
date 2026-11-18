@@ -10,6 +10,7 @@ import StatsBar from './components/StatsBar'
 import * as client from './lib/api'
 import type { Debate, Decision, Persona } from './lib/types'
 import { nextDecision } from './lib/decision'
+import { useDecisionBadge } from './lib/useDecisionBadge'
 
 export default function DebateRoom() {
   const api = useAppApi()
@@ -20,6 +21,7 @@ export default function DebateRoom() {
   const [deciding, setDeciding] = useState(false)
   const [decision, setDecision] = useState<Decision | null>(null)
   const [decisions, setDecisions] = useState<Decision[]>([])
+  useDecisionBadge(decisions.length)
   const [error, setError] = useState('')
   const [stats, setStats] = useState<{ debates: number; decisions: number } | null>(null)
 
