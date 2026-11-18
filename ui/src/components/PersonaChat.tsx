@@ -1,5 +1,6 @@
 import { ChatEmbed } from '@kirocrew/app-sdk'
 import type { Persona } from '../lib/types'
+import { personaName } from '../lib/personaName'
 
 interface Props {
   persona: Persona
@@ -19,7 +20,7 @@ export default function PersonaChat({ persona, slot }: Props) {
           className="inline-block h-2.5 w-2.5 rounded-full"
           style={{ background: persona.color || 'currentColor' }}
         />
-        <span className="text-sm font-semibold" title={persona.focus}>{persona.id}</span>
+        <span className="text-sm font-semibold" title={persona.focus}>{personaName(persona)}</span>
         {persona.focus && <span className="truncate text-xs text-muted">{persona.focus}</span>}
       </header>
       <div className="h-[420px] min-h-0">
